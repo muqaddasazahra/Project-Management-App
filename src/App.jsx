@@ -20,10 +20,24 @@ function handleAddProject()
 
     })
 }
+function handleSaveProject(projectData)
+{
+setProjectState(prevState=>{
+  const newProject={
+    ...projectData,
+    id:Math.random()
+  }
+  return {
+    ...prevState,
+    projects:[...prevState.projects, newProject]
+  }
+})
+}
 
+console.log(projectState);
 let content;
 if(projectState.selectedProjectId===null)
-content=<NewProject/>
+content=<NewProject onSave={handleSaveProject}/>
 else if(projectState.selectedProjectId===undefined)
 content= <NoProjectSelected onAddProject={handleAddProject}/>
 
