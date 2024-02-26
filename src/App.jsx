@@ -29,12 +29,14 @@ setProjectState(prevState=>{
   }
   return {
     ...prevState,
-    projects:[...prevState.projects, newProject]
+    selectedProjectId:undefined,
+    projects:[...prevState.projects, newProject],
+   
   }
 })
 }
 
-console.log(projectState);
+
 let content;
 if(projectState.selectedProjectId===null)
 content=<NewProject onSave={handleSaveProject}/>
@@ -44,7 +46,7 @@ content= <NoProjectSelected onAddProject={handleAddProject}/>
   return (
     
     <main className="h-screen my-8 flex gap-8">
-      <ProjectSideBar onAddProject={handleAddProject}/>
+      <ProjectSideBar onAddProject={handleAddProject} projects={projectState.projects}/>
       {content}
     </main>
     
