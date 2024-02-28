@@ -3,6 +3,7 @@ import NewProject from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectSideBar from "./components/ProjectSideBar";
 import { ContainerWithChildren } from "postcss/lib/container";
+import SelectedProject from "./components/SelectedProject";
 
 function App() {
   const [projectState,setProjectState]=useState({
@@ -48,8 +49,20 @@ function handleCancelProject()
     })
 }
 
+function handleSelectProject(id)
+{
+  setProjectState(prevState=>
+    {
+      return {
+        ...prevState,
+        selectedProjectId:id
+      }
 
-let content;
+    })
+}
+const selectedProject=projectState.projects.find(project=>project.id===projectState.selectedProjectId);
+
+let content=<SelectedProject project={selectedProject}/>;
 if(projectState.selectedProjectId===null)
 content=<NewProject onSave={handleSaveProject} onCancel={handleCancelProject}/>
 else if(projectState.selectedProjectId===undefined)
@@ -58,7 +71,7 @@ content= <NoProjectSelected onAddProject={handleAddProject}/>
   return (
     
     <main className="h-screen my-8 flex gap-8">
-      <ProjectSideBar onAddProject={handleAddProject} projects={projectState.projects}/>
+      <ProjectSideBar onAddProject={handleAddProject} projects={projectState.projects} onSelectProject={handleSelectProject}/>
       {content}
     </main>
     
