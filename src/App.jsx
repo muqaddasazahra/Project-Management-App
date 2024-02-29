@@ -2,8 +2,8 @@ import { useState } from "react";
 import NewProject from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectSideBar from "./components/ProjectSideBar";
-import { ContainerWithChildren } from "postcss/lib/container";
 import SelectedProject from "./components/SelectedProject";
+
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -77,7 +77,15 @@ function App() {
     });
   }
 
-  function handleDeleteTask() {}
+  function handleDeleteTask(id) {
+    setProjectState(prevState=>
+      {
+        return {
+          ...prevState,
+          tasks: prevState.tasks.filter(task=>task.id!==id)
+        }
+      })
+  }
   const selectedProject = projectState.projects.find(
     (project) => project.id === projectState.selectedProjectId
   );
@@ -107,6 +115,7 @@ function App() {
         onAddProject={handleAddProject}
         projects={projectState.projects}
         onSelectProject={handleSelectProject}
+        selectedProjectId={projectState.selectedProjectId}
       />
       {content}
     </main>
