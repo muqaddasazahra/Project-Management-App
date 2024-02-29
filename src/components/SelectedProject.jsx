@@ -21,7 +21,7 @@ export default function SelectedProject({
           </h1>
           <button
             className="text-stone-600 hover:text-stone-950"
-            onClick={onDelete}
+            onClick={()=>onDelete(project.id)}
           >
             Delete
           </button>
@@ -31,6 +31,7 @@ export default function SelectedProject({
           {project.description}
         </p>
       </header>
+      {project.id}
       <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
     </div>
   );

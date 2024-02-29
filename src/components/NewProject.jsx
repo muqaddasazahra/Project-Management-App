@@ -1,7 +1,7 @@
 import Input from "./Input";
 import { useRef } from "react";
 import Modal from "./Modal";
-export default function NewProject({onSave,onCancel})
+export default function NewProject({onAdd,onSave,onCancel})
 {   
     const title=useRef();
     const description=useRef();
@@ -19,7 +19,7 @@ export default function NewProject({onSave,onCancel})
          return;
         }
        
-        onSave({
+        onAdd({
             title:enteredTitle,
             description:enteredDescription,
             dueDate:enteredDueDate,
